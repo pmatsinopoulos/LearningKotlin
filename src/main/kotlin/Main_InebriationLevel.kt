@@ -18,12 +18,25 @@ fun main(args: Array<String>) {
 
     var inebriationLevel = castFireball(numFireballs = 5)
     println("inebriationLevel: $inebriationLevel")
+    printInebriationStatus(inebriationLevel = inebriationLevel)
 
     inebriationLevel = castFireball(numFireballs = 2_000)
     println("inebriationLevel: $inebriationLevel")
 
     inebriationLevel = castFireball(numFireballs = 1)
     println("inebriationLevel: $inebriationLevel")
+}
+
+private fun printInebriationStatus(inebriationLevel: Double) {
+    val result = when (inebriationLevel) {
+        in 1.0..9.99 -> "tipsy"
+        in 10.0..19.99 -> "sloshed"
+        in 20.0..29.99 -> "soused"
+        in 30.0..39.99 -> "stewed"
+        in 40.0..49.99 -> "..t0aSt3d"
+        else -> "very drunk"
+    }
+    println("Inebriation Status: $result")
 }
 
 private fun printPlayerStatus(
