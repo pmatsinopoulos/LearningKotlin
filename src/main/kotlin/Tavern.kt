@@ -8,6 +8,9 @@ var playerSilver = 10
 
 fun main() {
     placeOrder("shandy,Dragon's Breath,5.91")
+    placeOrder("shandy,Dragon's Breath,5.91")
+    placeOrder("shandy,Dragon's Breath,5.91")
+    placeOrder("shandy,Dragon's Breath,5.91")
 }
 
 private fun performPurchase(price: Double) {
@@ -16,12 +19,16 @@ private fun performPurchase(price: Double) {
     val totalGoldInPurse = playerGold + playerSilver / 100.0
     println("Total purse: $totalGoldInPurse")
     val remainingBalance = totalGoldInPurse - price
-    println("Remaining balance: ${"%.2f".format(remainingBalance)}")
-    val remainingGold = remainingBalance.toInt()
-    val remainingSilver = (remainingBalance % 1 * 100).roundToInt()
-    playerGold = remainingGold
-    playerSilver = remainingSilver
-    println("New wallet, Gold: $playerGold, Silver: $playerSilver")
+    if (remainingBalance < 0) {
+        println("Not enough money")
+    } else {
+        println("Remaining balance: ${"%.2f".format(remainingBalance)}")
+        val remainingGold = remainingBalance.toInt()
+        val remainingSilver = (remainingBalance % 1 * 100).roundToInt()
+        playerGold = remainingGold
+        playerSilver = remainingSilver
+        println("New wallet, Gold: $playerGold, Silver: $playerSilver")
+    }
 }
 
 private fun displayBalance() {
