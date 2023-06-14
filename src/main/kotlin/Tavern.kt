@@ -2,9 +2,20 @@ import java.util.*
 
 const val TAVERN_NAME = "Taernyl's Folly"
 
+var playerGold = 10
+var playerSilver = 10
+
 fun main() {
     placeOrder("shandy,Dragon's Breath,5.91")
-//    placeOrder("elixir,Shirley's Temple,4.12")
+}
+
+private fun performPurchase(price: Double) {
+    displayBalance()
+    println("Purchasing item for $price")
+}
+
+private fun displayBalance() {
+    println("Player's purse balance: Gold: $playerGold , Silver: $playerSilver")
 }
 
 private fun placeOrder(menuData: String) {
@@ -15,6 +26,8 @@ private fun placeOrder(menuData: String) {
     val (type, name, price) = menuData.split(',')
     val message = "Madrigal buys a $name ($type) for $price GOLD."
     println(message)
+
+    performPurchase(price.toDoubleOrNull() ?: 0.0)
 
     val phrase = if (name == "Dragon's Breath") {
         "Madrigal exclaims ${toDragonSpeak("Ah, Delicious $name!")}"
