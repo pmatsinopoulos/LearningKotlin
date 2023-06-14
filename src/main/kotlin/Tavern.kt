@@ -12,6 +12,10 @@ fun main() {
 private fun performPurchase(price: Double) {
     displayBalance()
     println("Purchasing item for $price")
+    val totalGoldInPurse = playerGold + playerSilver / 100.0
+    println("Total purse: $totalGoldInPurse")
+    val remainingBalance = totalGoldInPurse - price
+    println("Remaining balance: $remainingBalance")
 }
 
 private fun displayBalance() {
