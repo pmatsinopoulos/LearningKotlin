@@ -14,6 +14,8 @@ private inline fun runSimulation(
     val numBuildings = (1..3).shuffled().last()
     costPrinter(numBuildings)
     println(greetingFunction(playerName))
+    println(greetingFunction(playerName))
+    println(greetingFunction(playerName))
 }
 
 private fun printConstructionCost(numBuildings: Int) {
