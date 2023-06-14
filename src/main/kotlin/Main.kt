@@ -27,5 +27,5 @@ fun main(args: Array<String>) {
         else -> " is in awful condition!"
     }
 
-    println(name + healthStatus)
+    println("(Aura: $auraColor) (Blessed: ${if (isBlessed) "YES" else "NO"}) $name$healthStatus")
 }
