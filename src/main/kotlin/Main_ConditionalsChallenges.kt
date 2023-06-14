@@ -1,3 +1,4 @@
+import java.util.*
 import kotlin.math.pow
 
 fun main(args: Array<String>) {
@@ -32,4 +33,11 @@ fun main(args: Array<String>) {
     }
 
     println("(Aura: $auraColor) (Blessed: ${if (isBlessed) "YES" else "NO"}) $name$healthStatus")
+    val statusFormatString = "H(HP) (A) -> H"
+    var status = statusFormatString.replace("HP", "HP: $healthPoints")
+    status = status.replace("A", "Aura: $auraColor")
+    status = status.replace("(H[^P]|H\$)".toRegex()) {
+        "$healthStatus${if (it.value.length >= 2) it.value[it.value.length - 1] else ""}"
+    }
+    println(status)
 }
