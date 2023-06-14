@@ -10,6 +10,8 @@ fun main(args: Array<String>) {
     val healthStatus = formatHealthStatus(healthPoints, isBlessed)
 
     printPlayerStatus(auraColor, isBlessed, name, healthStatus)
+
+    castFireball(5)
 }
 
 private fun printPlayerStatus(
@@ -46,4 +48,8 @@ private fun formatHealthStatus(healthPoints: Int, isBlessed: Boolean): String {
         else -> " is in awful condition!"
     }
     return healthStatus
+}
+
+private fun castFireball(numFireballs: Int) {
+    println("A glass of Fireball springs into existence. (x$numFireballs)")
 }
