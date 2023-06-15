@@ -3,6 +3,7 @@ import java.util.*
 import kotlin.math.roundToInt
 
 const val TAVERN_NAME = "Taernyl's Folly"
+const val MENU_TITLE = "*** Welcome to $TAVERN_NAME ***"
 
 var playerGold = 10
 var playerSilver = 10
@@ -26,6 +27,8 @@ fun main() {
         println("The tavern master says: Nay, they departed hours ago.")
     }
 
+    printMenu()
+
     (0..9).forEach { _ ->
         val first = patronList.shuffled().first()
         val last = lastName.shuffled().first()
@@ -39,6 +42,23 @@ fun main() {
         placeOrder(patron = uniquePatrons.shuffled().first(), menuData = menuList.shuffled().first())
         orderCount++
     }
+}
+
+private fun printMenu() {
+    println()
+    println(MENU_TITLE)
+    println()
+    menuList.forEach { menuEntry ->
+        val (type, menuItem, price) = menuEntry.split(',')
+        val numberOfDotsInBetween = calculateNumberOfDotsInBetween(menuItem = menuItem, price = price.toDouble())
+        val dotsString = ".".repeat(numberOfDotsInBetween)
+        println("$menuItem$dotsString$price")
+    }
+    println()
+}
+
+private fun calculateNumberOfDotsInBetween(menuItem: String, price: Double): Int {
+    return MENU_TITLE.length - menuItem.length - "%.2f".format(price).length
 }
 
 private fun performPurchase(price: Double) {
