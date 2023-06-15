@@ -24,8 +24,8 @@ fun main() {
         println("The tavern master says: Nay, they departed hours ago.")
     }
 
-    patronList.forEachIndexed { index, patron ->
-        placeOrder(patron = patron, menuData = "shandy,Dragon's Breath,5.91")
+    patronList.forEachIndexed { _, patron ->
+        placeOrder(patron = patron, menuData = menuList.shuffled().first())
     }
 
     menuList.forEachIndexed { index, data ->
