@@ -20,8 +20,8 @@ fun main() {
     }
     placeOrder("shandy,Dragon's Breath,5.91")
 
-    patronList.forEach {
-        println("Hello $it")
+    patronList.forEachIndexed { index, patron ->
+        println("Hello $patron ($index)")
     }
 }
 
