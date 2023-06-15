@@ -8,8 +8,12 @@ var playerSilver = 10
 val patronList = listOf("Eli", "Mordoc", "Sophie")
 
 fun main() {
+    if (patronList.contains("Eli")) {
+        println("The tavern master says: Eli's in the back playing cards.")
+    } else {
+        println("The tavern master says: Eli isn't here.")
+    }
     placeOrder("shandy,Dragon's Breath,5.91")
-    println(patronList[0])
 }
 
 private fun performPurchase(price: Double) {
