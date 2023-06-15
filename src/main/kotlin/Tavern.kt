@@ -33,6 +33,12 @@ fun main() {
         uniquePatrons.add(name)
     }
     println(uniquePatrons)
+
+    var orderCount = 0
+    while (orderCount < 10) {
+        placeOrder(patron = uniquePatrons.shuffled().first(), menuData = menuList.shuffled().first())
+        orderCount++
+    }
 }
 
 private fun performPurchase(price: Double) {
