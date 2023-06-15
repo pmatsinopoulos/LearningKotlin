@@ -48,13 +48,29 @@ private fun printMenu() {
     println()
     println(MENU_TITLE)
     println()
-    menuList.forEach { menuEntry ->
-        val (type, menuItem, price) = menuEntry.split(',')
-        val numberOfDotsInBetween = calculateNumberOfDotsInBetween(menuItem = menuItem, price = price.toDouble())
-        val dotsString = ".".repeat(numberOfDotsInBetween)
-        println("$menuItem$dotsString$price")
+    val menuItemsSplit = menuList.map { menuEntry ->
+        menuEntry.split(',')
+    }
+    val menuItemSplitGrouped = menuItemsSplit.groupBy { mi -> mi[0] }
+    menuItemSplitGrouped.forEach { menuItemGroup ->
+        printMenuType(menuType = menuItemGroup.key)
+        menuItemGroup.value.forEach { menuEntry ->
+            printMenuEntry(menuEntry = menuEntry)
+        }
     }
     println()
+}
+
+private fun printMenuType(menuType: String): Unit {
+    val padding = (MENU_TITLE.length - menuType.length) / 2 + menuType.length
+    println("%${padding}s".format("~[$menuType]~"))
+}
+
+private fun printMenuEntry(menuEntry: List<String>) {
+    val (_, menuItem, price) = menuEntry
+    val numberOfDotsInBetween = calculateNumberOfDotsInBetween(menuItem = menuItem, price = price.toDouble())
+    val dotsString = ".".repeat(numberOfDotsInBetween)
+    println("$menuItem$dotsString$price")
 }
 
 private fun calculateNumberOfDotsInBetween(menuItem: String, price: Double): Int {
