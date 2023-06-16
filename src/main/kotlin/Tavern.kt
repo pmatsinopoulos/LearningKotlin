@@ -5,8 +5,6 @@ import kotlin.math.roundToInt
 const val TAVERN_NAME = "Taernyl's Folly"
 const val MENU_TITLE = "*** Welcome to $TAVERN_NAME ***"
 
-var playerGold = 10
-var playerSilver = 10
 val patronList = mutableListOf("Eli", "Mordoc", "Sophie")
 val lastName = listOf("Ironfoot", "Fernsworth", "Baggins")
 val uniquePatrons = mutableSetOf<String>()
@@ -38,14 +36,16 @@ fun main() {
     }
     println(uniquePatrons)
 
+    uniquePatrons.forEach { patron ->
+        patronGold[patron] = 6.0
+    }
+    println("Gold before any purchases:")
+    println(patronGold)
+
     var orderCount = 0
     while (orderCount < 10) {
         placeOrder(patron = uniquePatrons.shuffled().first(), menuData = menuList.shuffled().first())
         orderCount++
-    }
-
-    uniquePatrons.forEach { patron ->
-        patronGold[patron] = 6.0
     }
 
     println(patronGold)
@@ -84,26 +84,23 @@ private fun calculateNumberOfDotsInBetween(menuItem: String, price: Double): Int
     return MENU_TITLE.length - menuItem.length - "%.2f".format(price).length
 }
 
-private fun performPurchase(price: Double) {
-    displayBalance()
+private fun performPurchase(patron: String, price: Double) {
+    displayBalance(patron)
     println("Purchasing item for $price")
-    val totalGoldInPurse = playerGold + playerSilver / 100.0
+    val totalGoldInPurse = patronGold.getValue(patron)
     println("Total purse: $totalGoldInPurse")
     val remainingBalance = totalGoldInPurse - price
     if (remainingBalance < 0) {
         println("Not enough money")
     } else {
         println("Remaining balance: ${"%.2f".format(remainingBalance)}")
-        val remainingGold = remainingBalance.toInt()
-        val remainingSilver = (remainingBalance % 1 * 100).roundToInt()
-        playerGold = remainingGold
-        playerSilver = remainingSilver
-        println("New wallet, Gold: $playerGold, Silver: $playerSilver")
+        patronGold[patron] = remainingBalance
+        displayBalance(patron)
     }
 }
 
-private fun displayBalance() {
-    println("Player's purse balance: Gold: $playerGold , Silver: $playerSilver")
+private fun displayBalance(patron: String) {
+    println("Player's purse balance: ${patronGold[patron]}")
 }
 
 private fun placeOrder(patron: String, menuData: String) {
@@ -115,7 +112,7 @@ private fun placeOrder(patron: String, menuData: String) {
     val message = "$patron buys a $name ($type) for $price GOLD."
     println(message)
 
-//    performPurchase(price.toDoubleOrNull() ?: 0.0)
+    performPurchase(patron = patron, price = price.toDoubleOrNull() ?: 0.0)
 
     val phrase = if (name == "Dragon's Breath") {
         "$patron exclaims ${toDragonSpeak("Ah, Delicious $name!")}"
