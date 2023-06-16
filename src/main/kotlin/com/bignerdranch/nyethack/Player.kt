@@ -12,6 +12,8 @@ class Player(
             field = value.trim()
         }
 
+    constructor(_name: String) : this(_name = _name, healthPoints = 100, isBlessed = true, isImmortal = false)
+
     fun castFireball(numFireballs: Int = 2) = println("A glass of Fireball springs into existence. (x$numFireballs)")
 
     fun auraColor() =

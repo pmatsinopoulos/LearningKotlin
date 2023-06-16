@@ -2,10 +2,7 @@ package com.bignerdranch.nyethack
 
 fun main(args: Array<String>) {
     val player = Player(
-        _name = "madrigal",
-        healthPoints = 89,
-        isBlessed = true,
-        isImmortal = false
+        _name = "madrigal"
     )
     player.castFireball()
 
