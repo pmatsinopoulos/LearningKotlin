@@ -10,6 +10,10 @@ fun main(args: Array<String>) {
     println(currentRoom.description())
     println(currentRoom.load())
 
+    var townSquare: Room = TownSquare()
+    println(townSquare.description())
+    println(townSquare.load())
+
     printPlayerStatus(player)
 }
 
