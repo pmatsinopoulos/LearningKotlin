@@ -48,6 +48,20 @@ object Game {
         println("(Aura: ${player.auraColor()}) (Blessed: ${if (player.isBlessed) "YES" else "NO"}) ${player.name}${player.formatHealthStatus()}")
     }
 
+    private fun printMap() {
+        worldMap.forEachIndexed { y, yRooms ->
+            yRooms.forEachIndexed { x, xRoom ->
+                val indicator = if (player.currentPosition == Coordinate(x, y)) {
+                    "X"
+                } else {
+                    "O"
+                }
+                print("$indicator ")
+            }
+            println()
+        }
+    }
+
     private class GameInput(arg: String?) {
         private val input = arg ?: ""
         val command = input.split(" ")[0]
@@ -55,6 +69,7 @@ object Game {
 
         fun processCommand() = when (command.lowercase()) {
             "move" -> move(argument)
+            "map" -> printMap()
             in listOf("exit", "quit") -> endGame = true
             else -> commandNotFound()
         }
