@@ -10,7 +10,7 @@ fun main(args: Array<String>) {
     println(currentRoom.description())
     println(currentRoom.load())
 
-    var townSquare: Room = TownSquare()
+    var townSquare: Room = TownSquare(name = "TS")
     println(townSquare.description())
     println(townSquare.load())
 
