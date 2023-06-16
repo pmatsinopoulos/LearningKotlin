@@ -1,6 +1,6 @@
 package com.bignerdranch.nyethack
 
-class LootBox<T>(item: T) {
+class LootBox<T : Loot>(item: T) {
     var open = false
     private var loot: T = item
 
@@ -13,9 +13,11 @@ class LootBox<T>(item: T) {
     }
 }
 
-class Fedora(val name: String, val value: Int)
+open class Loot(val value: Int)
 
-class Coin(val value: Int) {
+class Fedora(val name: String, value: Int) : Loot(value)
+
+class Coin(value: Int) : Loot(value) {
     override fun toString(): String {
         return value.toString()
     }
