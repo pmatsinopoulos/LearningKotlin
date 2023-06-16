@@ -3,6 +3,7 @@ package com.bignerdranch.nyethack
 object Game {
     private val player = Player(_name = "Madrigal")
     private var currentRoom: Room = TownSquare(name = "Town Square")
+    private var endGame = false
 
     private var worldMap = listOf(
         listOf(currentRoom, Room("Tavern"), Room("Back Room")),
@@ -15,7 +16,7 @@ object Game {
     }
 
     fun play() {
-        while (true) {
+        while (!endGame) {
             println(currentRoom.description())
             println(currentRoom.load())
             printPlayerStatus()
@@ -54,6 +55,7 @@ object Game {
 
         fun processCommand() = when (command.lowercase()) {
             "move" -> move(argument)
+            in listOf("exit", "quit") -> endGame = true
             else -> commandNotFound()
         }
 
