@@ -12,6 +12,11 @@ class Player(
             field = value.trim()
         }
 
+    init {
+        require(healthPoints > 0) { "healthPoints must be greater than zero." }
+        require(name.isNotBlank()) { "name can't be blank" }
+    }
+
     constructor(_name: String) : this(_name = _name, isBlessed = true, isImmortal = false) {
         if (name.lowercase() == "kar") {
             healthPoints = 40
