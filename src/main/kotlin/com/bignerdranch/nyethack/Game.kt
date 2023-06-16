@@ -6,6 +6,10 @@ fun main(args: Array<String>) {
     )
     player.castFireball()
 
+    var currentRoom = Room(name = "Foyer")
+    println(currentRoom.description())
+    println(currentRoom.load())
+
     printPlayerStatus(player)
 }
 
