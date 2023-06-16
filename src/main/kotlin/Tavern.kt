@@ -14,7 +14,7 @@ val menuList = File("data/tavern-menu-data.txt")
     .readText()
     .split("\n")
     .filterNot { it == "" }
-val patronGold = mapOf("Eli" to 10.5, "Mordoc" to 8.0, "Sophie" to 5.5)
+val patronGold: MutableMap<String, Double> = mutableMapOf()
 
 fun main() {
     if (patronList.contains("Eli")) {
@@ -44,10 +44,11 @@ fun main() {
         orderCount++
     }
 
+    uniquePatrons.forEach { patron ->
+        patronGold[patron] = 6.0
+    }
+
     println(patronGold)
-    println(patronGold["Eli"])
-    println(patronGold["Mordoc"])
-    println(patronGold["Sophie"])
 }
 
 private fun printMenu() {
