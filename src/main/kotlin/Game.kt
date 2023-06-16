@@ -4,15 +4,15 @@ fun main(args: Array<String>) {
     val isBlessed = true
     val isImmortal = false
 
+    val player = Player()
+    player.castFireball()
+
     // Aura
     val auraColor = auraColor(isBlessed, healthPoints, isImmortal)
 
     val healthStatus = formatHealthStatus(healthPoints, isBlessed)
 
     printPlayerStatus(auraColor, isBlessed, name, healthStatus)
-
-    castFireball(numFireballs = 5)
-    castFireball()
 }
 
 private fun printPlayerStatus(
@@ -46,6 +46,3 @@ private fun formatHealthStatus(healthPoints: Int, isBlessed: Boolean) =
         100 -> " is in excellent condition"
         else -> " is in awful condition!"
     }
-
-private fun castFireball(numFireballs: Int = 2) =
-    println("A glass of Fireball springs into existence. (x$numFireballs)")
