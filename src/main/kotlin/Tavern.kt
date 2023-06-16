@@ -14,6 +14,7 @@ val menuList = File("data/tavern-menu-data.txt")
     .readText()
     .split("\n")
     .filterNot { it == "" }
+val patronGold = mapOf("Eli" to 10.5, "Mordoc" to 8.0, "Sophie" to 5.5)
 
 fun main() {
     if (patronList.contains("Eli")) {
@@ -42,6 +43,8 @@ fun main() {
         placeOrder(patron = uniquePatrons.shuffled().first(), menuData = menuList.shuffled().first())
         orderCount++
     }
+
+    println(patronGold)
 }
 
 private fun printMenu() {
