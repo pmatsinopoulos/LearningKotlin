@@ -1,15 +1,15 @@
 package com.bignerdranch.nyethack
 
-class LootBox<T : Loot>(item: T) {
+class LootBox<T : Loot>(vararg item: T) {
     var open = false
-    private var loot: T = item
+    private var loot: Array<out T> = item
 
-    fun fetch(): T? {
-        return loot.takeIf { open }
+    fun fetch(item: Int): T? {
+        return loot[item].takeIf { open }
     }
 
-    fun <R> fetch(lootModFunction: (T) -> R): R? {
-        return lootModFunction(loot).takeIf { open }
+    fun <R> fetch(item: Int, lootModFunction: (T) -> R): R? {
+        return lootModFunction(loot[item]).takeIf { open }
     }
 }
 
@@ -24,13 +24,16 @@ class Coin(value: Int) : Loot(value) {
 }
 
 fun main() {
-    val lootBoxOne = LootBox(item = Fedora(name = "a generic-looking Fedora", value = 15))
-    val lootBoxTwo = LootBox(item = Coin(value = 15))
+    val lootBoxOne = LootBox(
+        Fedora(name = "a generic-looking Fedora", value = 15),
+        Fedora(name = "a dazzling magenta fedora", value = 35)
+    )
+    val lootBoxTwo = LootBox(Coin(value = 15))
     lootBoxOne.open = true
-    lootBoxOne.fetch()?.run {
+    lootBoxOne.fetch(1)?.run {
         println("name: $name, value: $value")
     }
-    val coin = lootBoxOne.fetch() {
+    val coin = lootBoxOne.fetch(1) {
         Coin(value = it.value * 3)
     }
     println("Coin: $coin")
