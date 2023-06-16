@@ -1,14 +1,16 @@
 package com.bignerdranch.nyethack
 
-class Player {
-    var name: String = ""
+class Player(
+    _name: String,
+    var healthPoints: Int,
+    var isBlessed: Boolean,
+    private var isImmortal: Boolean
+) {
+    var name: String = _name
         get() = field.capitalize()
         set(value) {
             field = value.trim()
         }
-    var healthPoints = 89
-    val isBlessed = true
-    private val isImmortal = false
 
     fun castFireball(numFireballs: Int = 2) = println("A glass of Fireball springs into existence. (x$numFireballs)")
 
