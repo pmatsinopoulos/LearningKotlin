@@ -15,6 +15,7 @@ val menuList = File("data/tavern-menu-data.txt")
     .filterNot { it == "" }
 val patronGold: MutableMap<String, Double> = mutableMapOf()
 
+private fun <T> Iterable<T>.random(): T = this.shuffled().first()
 fun main() {
     if (patronList.contains("Eli")) {
         println("The tavern master says: Eli's in the back playing cards.")
@@ -30,8 +31,8 @@ fun main() {
     printMenu()
 
     (0..9).forEach { _ ->
-        val first = patronList.shuffled().first()
-        val last = lastName.shuffled().first()
+        val first = patronList.random()
+        val last = lastName.random()
         val name = "$first $last"
         uniquePatrons.add(name)
     }
@@ -45,7 +46,7 @@ fun main() {
 
     var orderCount = 0
     while (orderCount < 10) {
-        placeOrder(patron = uniquePatrons.shuffled().first(), menuData = menuList.shuffled().first())
+        placeOrder(patron = uniquePatrons.random(), menuData = menuList.random())
         orderCount++
     }
 
