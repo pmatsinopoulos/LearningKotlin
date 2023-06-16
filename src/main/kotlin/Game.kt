@@ -4,6 +4,7 @@ fun main(args: Array<String>) {
     val isImmortal = false
 
     val player = Player()
+    player.name = "    madrigal    "
     player.castFireball()
 
     // Aura
