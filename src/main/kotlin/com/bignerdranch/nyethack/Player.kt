@@ -1,3 +1,5 @@
+package com.bignerdranch.nyethack
+
 class Player {
     var name: String = ""
         get() = field.capitalize()

@@ -1,6 +1,7 @@
+package com.bignerdranch.nyethack
+
 import java.io.File
 import java.util.*
-import kotlin.math.roundToInt
 
 const val TAVERN_NAME = "Taernyl's Folly"
 const val MENU_TITLE = "*** Welcome to $TAVERN_NAME ***"
@@ -100,7 +101,7 @@ private fun performPurchase(patron: String, price: Double) {
 }
 
 private fun displayBalance(patron: String) {
-    println("Player's purse balance: ${patronGold[patron]}")
+    println("com.bignerdranch.nyethack.Player's purse balance: ${patronGold[patron]}")
 }
 
 private fun placeOrder(patron: String, menuData: String) {
