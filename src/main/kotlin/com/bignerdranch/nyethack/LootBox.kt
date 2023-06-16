@@ -4,12 +4,12 @@ class LootBox<T : Loot>(vararg item: T) {
     var open = false
     private var loot: Array<out T> = item
 
-    fun fetch(item: Int): T? {
-        return loot[item].takeIf { open }
+    operator fun get(index: Int): T? {
+        return loot[index].takeIf { open }
     }
 
-    fun <R> fetch(item: Int, lootModFunction: (T) -> R): R? {
-        return lootModFunction(loot[item]).takeIf { open }
+    operator fun <R> get(index: Int, lootModFunction: (T) -> R): R? {
+        return lootModFunction(loot[index]).takeIf { open }
     }
 }
 
@@ -30,11 +30,11 @@ fun main() {
     )
     val lootBoxTwo = LootBox(Coin(value = 15))
     lootBoxOne.open = true
-    lootBoxOne.fetch(1)?.run {
+    lootBoxOne[1]?.run {
         println("name: $name, value: $value")
     }
-    val coin = lootBoxOne.fetch(1) {
+    val coin = lootBoxOne[1, {
         Coin(value = it.value * 3)
-    }
+    }]
     println("Coin: $coin")
 }
