@@ -1,5 +1,7 @@
 package com.bignerdranch.nyethack
 
+import java.io.File
+
 class Player(
     _name: String,
     var healthPoints: Int = 100,
@@ -7,10 +9,11 @@ class Player(
     private var isImmortal: Boolean
 ) {
     var name: String = _name
-        get() = field.capitalize()
+        get() = "${field.capitalize()} of $hometown"
         set(value) {
             field = value.trim()
         }
+    val hometown = selectHometown()
 
     init {
         require(healthPoints > 0) { "healthPoints must be greater than zero." }
@@ -45,4 +48,11 @@ class Player(
         100 -> " is in excellent condition"
         else -> " is in awful condition!"
     }
+
+    private fun selectHometown() = File("data/towns.txt")
+        .readText()
+        .split("\n")
+        .filterNot { it == "" }
+        .shuffled()
+        .first()
 }
