@@ -45,6 +45,9 @@ fun main() {
     }
 
     println(patronGold)
+    println(patronGold["Eli"])
+    println(patronGold["Mordoc"])
+    println(patronGold["Sophie"])
 }
 
 private fun printMenu() {
