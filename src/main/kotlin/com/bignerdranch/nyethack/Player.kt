@@ -12,7 +12,11 @@ class Player(
             field = value.trim()
         }
 
-    constructor(_name: String) : this(_name = _name, healthPoints = 100, isBlessed = true, isImmortal = false)
+    constructor(_name: String) : this(_name = _name, healthPoints = 100, isBlessed = true, isImmortal = false) {
+        if (name.lowercase() == "kar") {
+            healthPoints = 40
+        }
+    }
 
     fun castFireball(numFireballs: Int = 2) = println("A glass of Fireball springs into existence. (x$numFireballs)")
 
