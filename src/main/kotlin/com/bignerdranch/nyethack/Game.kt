@@ -2,7 +2,12 @@ package com.bignerdranch.nyethack
 
 object Game {
     private val player = Player(_name = "Madrigal")
-    private var currentRoom: Room = TownSquare(name = "TS")
+    private var currentRoom: Room = TownSquare(name = "Town Square")
+
+    private var worldMap = listOf(
+        listOf(currentRoom, Room("Tavern"), Room("Back Room")),
+        listOf(Room("Long Corridor"), Room("Generic Room"))
+    )
 
     init {
         println("Welcome, adventurer")
@@ -20,6 +25,22 @@ object Game {
         }
     }
 
+    private fun move(directionInput: String) =
+        try {
+            val direction = Direction.valueOf(directionInput.uppercase())
+            val newPosition = direction.updateCoordinate(player.currentPosition)
+            if (!newPosition.isInBounds) {
+                throw IllegalStateException("$direction is out of bounds")
+            }
+
+            val newRoom = worldMap[newPosition.y][newPosition.x]
+            player.currentPosition = newPosition
+            currentRoom = newRoom
+            "OK, you move $direction to the ${newRoom.name}.\n${newRoom.load()}"
+        } catch (e: Exception) {
+            "Invalid direction: $directionInput"
+        }
+
     private fun printPlayerStatus() {
         println(player.auraColor())
         println(player.healthPoints)
@@ -32,6 +53,7 @@ object Game {
         val argument = input.split(" ").getOrElse(1) { "" }
 
         fun processCommand() = when (command.lowercase()) {
+            "move" -> move(argument)
             else -> commandNotFound()
         }
 
