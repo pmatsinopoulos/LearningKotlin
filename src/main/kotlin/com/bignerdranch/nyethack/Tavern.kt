@@ -15,7 +15,6 @@ val menuList = File("data/tavern-menu-data.txt")
     .filterNot { it == "" }
 val patronGold: MutableMap<String, Double> = mutableMapOf()
 
-private fun <T> Iterable<T>.random(): T = this.shuffled().first()
 fun main() {
     if (patronList.contains("Eli")) {
         println("The tavern master says: Eli's in the back playing cards.")

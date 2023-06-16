@@ -66,6 +66,5 @@ class Player(
         .readText()
         .split("\n")
         .filterNot { it == "" }
-        .shuffled()
-        .first()
+        .random()
 }
