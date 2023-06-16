@@ -1,26 +1,33 @@
 package com.bignerdranch.nyethack
 
-fun main(args: Array<String>) {
-    val player = Player(
-        _name = "Kard"
-    )
-    player.castFireball()
+object Game {
+    private val player = Player(_name = "Madrigal")
+    private var currentRoom: Room = TownSquare(name = "TS")
 
-    var currentRoom = Room(name = "Foyer")
-    println(currentRoom.description())
-    println(currentRoom.load())
+    init {
+        println("Welcome, adventurer")
+        player.castFireball()
+    }
 
-    var townSquare: Room = TownSquare(name = "TS")
-    println(townSquare.description())
-    println(townSquare.load())
+    fun play() {
+        while (true) {
+            println(currentRoom.description())
+            println(currentRoom.load())
+            printPlayerStatus()
 
-    printPlayerStatus(player)
+            print("> Enter your command: ")
+            println("Last command: ${readLine()}")
+        }
+    }
+
+    private fun printPlayerStatus() {
+        println(player.auraColor())
+        println(player.healthPoints)
+        println("(Aura: ${player.auraColor()}) (Blessed: ${if (player.isBlessed) "YES" else "NO"}) ${player.name}${player.formatHealthStatus()}")
+    }
+
 }
 
-private fun printPlayerStatus(
-    player: Player
-) {
-    println(player.auraColor())
-    println(player.healthPoints)
-    println("(Aura: ${player.auraColor()}) (Blessed: ${if (player.isBlessed) "YES" else "NO"}) ${player.name}${player.formatHealthStatus()}")
+fun main(args: Array<String>) {
+    Game.play()
 }
