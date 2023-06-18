@@ -8,7 +8,11 @@ const val MENU_TITLE = "*** Welcome to $TAVERN_NAME ***"
 
 val patronList = mutableListOf("Eli", "Mordoc", "Sophie")
 val lastName = listOf("Ironfoot", "Fernsworth", "Baggins")
-val uniquePatrons = mutableSetOf<String>()
+val uniquePatrons = generateSequence {
+    val first = patronList.random()
+    val last = lastName.random()
+    "$first $last"
+}.take(10).toSet()
 val menuList = File("data/tavern-menu-data.txt")
     .readText()
     .split("\n")
@@ -29,12 +33,6 @@ fun main() {
 
     printMenu()
 
-    (0..9).forEach { _ ->
-        val first = patronList.random()
-        val last = lastName.random()
-        val name = "$first $last"
-        uniquePatrons.add(name)
-    }
     println(uniquePatrons)
 
     uniquePatrons.forEach { patron ->
